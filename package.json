@@ -10,6 +10,9 @@
   },
   "devDependencies": {
     "typescript": "^5.0.2",
-    "vite": "^4.3.9"
+    "vite": "^4.3.9",
+    "postcss": "^8.4.24",
+    "autoprefixer": "^10.4.14",
+    "sass": "^1.63.4"
   }
 }
