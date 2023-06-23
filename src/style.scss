@@ -1,0 +1,207 @@
+@use "sass:map";
+
+$breakpoints: (
+  tablet: 768px,
+  desktop: 1440px,
+);
+
+@mixin screen($breakpoint) {
+  $screen: map-get($breakpoints, $breakpoint);
+
+  @media screen and (min-width: $screen) {
+    @content;
+  }
+}
+
+:root {
+  --white: #ffffff;
+  --salmon: #ff7979;
+  --rich-blue: #5e54a4;
+  --black-marlin: #3d3b48;
+  --shamrock: #38cc8b;
+  --lavender-grey: #bab7d4;
+
+  background-color: var(--white);
+  font-family: "Poppins", sans-serif;
+}
+
+main {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 8.8rem 2.4rem 6.8rem;
+  background-image: url(/bg-intro-mobile.png);
+  background-color: var(--salmon);
+  row-gap: 6.4rem;
+}
+
+.copywrite {
+  color: var(--white);
+  text-align: center;
+
+  &__heading {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 3.6rem;
+    letter-spacing: -0.0292rem;
+  }
+
+  &__description {
+    margin-top: 1.6rem;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 2.6rem;
+  }
+}
+
+.container--form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.4rem;
+}
+
+.hero {
+  color: var(--white);
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 2.6rem;
+  letter-spacing: 0.0268rem;
+  padding: 1.8rem 6.6rem;
+  border-radius: 1rem;
+  background-color: var(--rich-blue);
+  box-shadow: 0px 8px 0px 0px rgba(0, 0, 0, 0.15);
+
+  &--emphasize {
+    font-weight: bold;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.6rem;
+  padding: 2.4rem;
+  border-radius: 1rem;
+  background-color: var(--white);
+  box-shadow: 0px 8px 0px 0px rgba(0, 0, 0, 0.15);
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  &__input {
+    color: var(--black-marlin);
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 2.6rem;
+    letter-spacing: 0.025rem;
+    padding: 1.5rem 1.94rem;
+    border: 1px solid #dedede;
+    border-radius: 0.5rem;
+
+    &::placeholder {
+      opacity: 0.75;
+    }
+
+    &--invalid {
+      border: 2px solid var(--salmon);
+    }
+  }
+
+  &__invalid {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    right: 0;
+    color: var(--salmon);
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  &__input--invalid + &__invalid {
+    display: block;
+  }
+
+  &__group:has(&__input--invalid) {
+    margin-bottom: 2.6rem;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%) translateX(-2.7rem);
+      width: 2.4rem;
+      height: 2.4rem;
+      background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle fill='%23FF7979' cx='12' cy='12' r='12'/%3E%3Crect fill='%23FFF' x='11' y='6' width='2' height='9' rx='1'/%3E%3Crect fill='%23FFF' x='11' y='17' width='2' height='2' rx='1'/%3E%3C/g%3E%3C/svg%3E");
+    }
+  }
+
+  &__cta {
+    color: var(--white);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 2.6rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    padding-block: 1.5rem;
+    border-radius: 0.5rem;
+    background: var(--shamrock);
+    box-shadow: 0px -4px 0px 0px rgba(0, 0, 0, 0.09) inset;
+    width: 100%;
+    margin-bottom: 0.8rem;
+  }
+
+  &__notice {
+    color: var(--lavender-grey);
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 2.1rem;
+
+    &--emphasize {
+      color: var(--salmon);
+    }
+  }
+}
+
+@include screen(desktop) {
+  main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 0 16.5rem;
+    background-image: url(/bg-intro-desktop.png);
+    gap: 0 4.5rem;
+  }
+
+  .copywrite {
+    text-align: start;
+
+    &__heading {
+      font-size: 5rem;
+      line-height: 5.5rem;
+      letter-spacing: -0.0521rem;
+    }
+
+    &__description {
+      margin-top: 4.2rem;
+    }
+  }
+
+  .form {
+    row-gap: 2rem;
+    padding: 4rem;
+    min-width: 54rem;
+
+    &__input {
+      padding-inline: 3.2rem;
+    }
+
+    &__notice {
+      line-height: 2.6rem;
+    }
+  }
+}
